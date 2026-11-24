@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin Dashboard | LataBoom</title>
+    <link rel="stylesheet" href="admin.css" />
+    <script type="module" src="admin.js"></script>
+  </head>
+  <body>
+    <div id="admin-app" class="admin-layout" hidden>
+      <aside class="sidebar">
+        <a class="brand" href="../index.html"><img class="brand-mark" src="../assets/lataboom_logo_transparent.png" alt="LataBoom logo" /></a>
+        <p class="sidebar-label">WORKSPACE</p>
+        <button class="side-link active" type="button" data-admin-view="overview" aria-controls="overview-view" aria-current="page">Overview</button>
+        <button class="side-link" type="button" data-admin-view="orders" aria-controls="orders-view">Orders</button>
+        <button class="side-link" type="button" data-admin-view="products" aria-controls="products-view">Products</button>
+        <button class="side-link" type="button" data-admin-view="blog" aria-controls="blog-view">Blog</button>
+        <button class="side-link" type="button" data-admin-view="offers" aria-controls="offers-view">Offers</button>
+        <a class="side-link" href="../index.html">View storefront</a>
+        <button id="signout-button" class="signout-button" type="button">Sign out</button>
+      </aside>
+      <main class="dashboard-main">
+        <header class="dashboard-header">
+          <div><p class="eyebrow">Administration</p><h1 id="admin-page-title">Dashboard</h1></div>
+          <p id="admin-email" class="admin-email"></p>
+        </header>
+        <section id="overview-view" class="admin-view">
+          <header class="admin-overview-heading">
+            <p class="eyebrow">Storefront</p>
+            <h2>Store management</h2>
+            <p>Use the sidebar to review orders and manage products, blog posts, and storefront images.</p>
+          </header>
+        </section>
+        <section id="orders-view" class="orders-admin-view admin-view" hidden>
+          <p id="orders-admin-message" class="message" role="status" aria-live="polite"></p>
+          <nav id="order-status-nav" class="order-status-nav" aria-label="Filter orders by status">
+            <button class="order-status-filter is-active" type="button" data-order-filter="all" aria-pressed="true">All <span data-order-count="all">0</span></button>
+            <button class="order-status-filter" type="button" data-order-filter="pending" aria-pressed="false">Pending <span data-order-count="pending">0</span></button>
+            <button class="order-status-filter" type="button" data-order-filter="confirmed" aria-pressed="false">Confirmed <span data-order-count="confirmed">0</span></button>
+            <button class="order-status-filter" type="button" data-order-filter="processing" aria-pressed="false">Processing <span data-order-count="processing">0</span></button>
+            <button class="order-status-filter" type="button" data-order-filter="shipped" aria-pressed="false">Shipped <span data-order-count="shipped">0</span></button>
+            <button class="order-status-filter" type="button" data-order-filter="delivered" aria-pressed="false">Delivered <span data-order-count="delivered">0</span></button>
+            <button class="order-status-filter" type="button" data-order-filter="cancelled" aria-pressed="false">Cancelled <span data-order-count="cancelled">0</span></button>
+          </nav>
+          <div class="blog-list-header"><h3>Customer orders</h3><span id="order-count" aria-live="polite">Loading…</span></div>
+          <div id="order-list" class="order-admin-list" aria-live="polite" aria-busy="true"></div>
+        </section>
+        <section id="products-view" class="products-admin-view admin-view" aria-labelledby="products-admin-title" hidden>
+          <header class="blog-admin-header">
+            <div>
+              <p class="eyebrow">Catalog</p>
+              <h2 id="products-admin-title">Products</h2>
+              <p class="nav-manager-intro">Add product galleries, descriptions, regular and special prices, and quantity price options.</p>
+            </div>
+          </header>
+          <p id="products-admin-message" class="message" role="status" aria-live="polite"></p>
+          <form id="product-form" class="blog-post-form">
+            <input name="id" type="hidden" />
+            <label class="blog-field">Product category<select name="category" required><option value="">Select category</option><option value="honey">Honey</option><option value="dry_food">Dry Food</option><option value="mix_food">Mix Food</option><option value="nuts_seeds">Nuts &amp; Seeds</option><option value="pickle">Pickle</option><option value="dates">Dates</option><option value="masala">Masala</option><option value="tea">Tea</option></select></label>
+            <label class="blog-field">Product title<input name="product_name" type="text" maxlength="180" placeholder="Enter product title" required /></label>
+            <label class="blog-field">Short description<textarea name="short_description" rows="2" maxlength="300" placeholder="A short summary for product cards"></textarea></label>
+            <fieldset class="quantity-prices-field">
+              <legend>Quantity and pricing</legend>
+              <p class="quantity-prices-help">Add one row per quantity. Set its regular price, optional special price, and stock availability.</p>
+              <div id="quantity-price-rows" class="quantity-price-rows"></div>
+              <button id="add-quantity-price" class="add-quantity-price" type="button">Add quantity</button>
+            </fieldset>
+            <div class="product-images-fields">
+              <label class="blog-field">Product images (select multiple)<input name="image_files" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" multiple /></label>
+              <label class="blog-field">Or add image links (one per line)<textarea name="image_urls" rows="3" placeholder="https://example.com/product-front.webp&#10;https://example.com/product-back.webp"></textarea></label>
+              <div id="product-image-preview" class="product-image-preview" aria-label="Product image previews" aria-live="polite"></div>
+            </div>
+            <label class="blog-field">Full description<textarea name="description" rows="5" maxlength="10000" placeholder="Full product details"></textarea></label>
+            <div class="blog-form-actions">
+              <button id="product-submit-button" type="submit">Add product</button>
+              <button id="product-cancel-edit" class="cancel-edit-button" type="button" hidden>Cancel edit</button>
+            </div>
+          </form>
+          <div class="blog-list-header">
+            <h3>Product catalog</h3>
+            <span id="product-count" aria-live="polite">Loading…</span>
+          </div>
+          <div id="product-list" class="blog-post-list" aria-busy="true"></div>
+        </section>
+        <section id="blog-view" class="blog-admin-view admin-view" aria-labelledby="blog-admin-title" hidden>
+          <header class="blog-admin-header">
+            <div>
+              <p class="eyebrow">Publishing</p>
+              <h2 id="blog-admin-title">Blog posts</h2>
+              <p class="nav-manager-intro">Manage one featured Big post and publish as many Small posts as you need.</p>
+            </div>
+          </header>
+          <p id="blog-admin-message" class="message" role="status" aria-live="polite"></p>
+          <form id="blog-post-form" class="blog-post-form">
+            <input name="id" type="hidden" />
+            <label class="blog-field">Post size<select name="post_type" id="blog-post-type"><option value="big">Big · one featured post</option><option value="small">Small · unlimited posts</option></select></label>
+            <label class="blog-field">Choose image from your device<input name="image_file" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" /></label>
+            <label class="blog-field">Or use an image link<input name="image_url" type="url" inputmode="url" placeholder="https://example.com/blog-image.jpg" /></label>
+            <label class="blog-field">Title<input name="title" type="text" maxlength="200" placeholder="Write a clear post title" required /></label>
+            <label class="blog-field" id="blog-description-field">Description<textarea name="description" rows="5" maxlength="5000" placeholder="Write a short description for the Big post"></textarea></label>
+            <div class="blog-form-actions">
+              <button id="blog-submit-button" type="submit">Publish post</button>
+              <button id="blog-cancel-edit" class="cancel-edit-button" type="button" hidden>Cancel edit</button>
+            </div>
+          </form>
+          <div class="blog-list-header">
+            <h3>Published posts</h3>
+            <span id="blog-post-count" aria-live="polite">Loading…</span>
+          </div>
+          <div id="blog-post-list" class="blog-post-list" aria-busy="true"></div>
+        </section>
+        <section id="offers-view" class="image-manager admin-view" aria-labelledby="image-manager-title" hidden>
+          <header class="image-manager-header">
+            <div>
+              <p class="eyebrow">Storefront</p>
+              <h2 id="image-manager-title">Homepage images</h2>
+              <p class="nav-manager-intro">Upload image files or add a public image URL. The storefront displays the saved image automatically.</p>
+            </div>
+          </header>
+          <p id="image-manager-message" class="message" role="status" aria-live="polite"></p>
+          <article class="image-slot-card hero-slot-card">
+            <div class="image-slot-heading"><div><h3>Image 1 · rotating carousel</h3><p>Upload multiple slides. Images fade and advance automatically every 10 seconds.</p></div></div>
+            <form id="hero-image-upload" class="image-upload-form">
+              <label class="image-field">Choose image files<input name="images" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" multiple required /></label>
+              <label class="image-field">Alt text (optional)<input name="alt_text" type="text" maxlength="160" placeholder="Describe the uploaded image" /></label>
+              <button class="upload-image-button" type="submit">Upload carousel images</button>
+            </form>
+            <form id="hero-image-link" class="image-link-form">
+              <label class="image-field">Or add an image link<input name="image_url" type="url" inputmode="url" placeholder="https://example.com/banner.webp" required /></label>
+              <label class="image-field">Alt text (optional)<input name="alt_text" type="text" maxlength="160" placeholder="Describe the linked image" /></label>
+              <button class="add-image-link-button" type="submit">Add image link</button>
+            </form>
+            <div id="hero-image-list" class="uploaded-image-list" aria-live="polite"></div>
+          </article>
+          <div class="single-image-grid">
+            <article class="image-slot-card">
+              <div class="image-slot-heading"><div><h3>Image 2 · fixed panel</h3><p>One image only. Visitors cannot switch it.</p></div></div>
+              <div id="side-one-preview" class="admin-image-preview"></div>
+              <form id="side-one-upload" class="image-upload-form single-image-form">
+                <label class="image-field">Choose image<input name="image" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" required /></label>
+                <label class="image-field">Alt text (optional)<input name="alt_text" type="text" maxlength="160" placeholder="Describe the image" /></label>
+                <button class="upload-image-button" type="submit">Upload / replace image</button>
+              </form>
+              <form id="side-one-link" class="image-link-form single-image-form">
+                <label class="image-field">Or use image link<input name="image_url" type="url" inputmode="url" placeholder="https://example.com/image.webp" required /></label>
+                <label class="image-field">Alt text (optional)<input name="alt_text" type="text" maxlength="160" placeholder="Describe the image" /></label>
+                <button class="add-image-link-button" type="submit">Use this image link</button>
+              </form>
+              <button class="delete-single-image" id="delete-side-one" type="button" hidden>Remove image</button>
+            </article>
+            <article class="image-slot-card">
+              <div class="image-slot-heading"><div><h3>Image 3 · fixed panel</h3><p>One image only. Visitors cannot switch it.</p></div></div>
+              <div id="side-two-preview" class="admin-image-preview"></div>
+              <form id="side-two-upload" class="image-upload-form single-image-form">
+                <label class="image-field">Choose image<input name="image" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" required /></label>
+                <label class="image-field">Alt text (optional)<input name="alt_text" type="text" maxlength="160" placeholder="Describe the image" /></label>
+                <button class="upload-image-button" type="submit">Upload / replace image</button>
+              </form>
+              <form id="side-two-link" class="image-link-form single-image-form">
+                <label class="image-field">Or use image link<input name="image_url" type="url" inputmode="url" placeholder="https://example.com/image.webp" required /></label>
+                <label class="image-field">Alt text (optional)<input name="alt_text" type="text" maxlength="160" placeholder="Describe the image" /></label>
+                <button class="add-image-link-button" type="submit">Use this image link</button>
+              </form>
+              <button class="delete-single-image" id="delete-side-two" type="button" hidden>Remove image</button>
+            </article>
+          </div>
+        </section>
+        <p id="dashboard-message" class="message" role="status" aria-live="polite"></p>
+      </main>
+    </div>
+    <noscript>This admin area requires JavaScript to verify your Supabase session.</noscript>
+  </body>
+</html>

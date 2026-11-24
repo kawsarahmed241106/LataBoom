@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Product details from LataBoom." />
+    <title>Product | LataBoom</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../cart.css" />
+    <link rel="stylesheet" href="product.css" />
+    <script type="module" src="product.js"></script>
+    <script type="module" src="../cart.js"></script>
+  </head>
+  <body>
+    <header id="top" class="utility-bar">
+      <a class="brand" href="../index.html" aria-label="LataBoom home">
+        <img class="brand-mark" src="../assets/lataboom_logo_transparent.png" alt="LataBoom logo" />
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <a class="nav-link" href="../about/index.html">About</a>
+        <a class="nav-link is-active" href="index.html" aria-current="page">Shop</a>
+        <a class="nav-link offer-link" href="../offers/index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7.2-7.2a2 2 0 0 1 0-2.8l7.2-7.2a2 2 0 0 1 1.4-.6H19a2 2 0 0 1 2 2v7.1a2 2 0 0 1-.4 1.5Z"/><circle cx="16" cy="8" r="1.2"/><path d="m8 14 5-5m-4 0h.01M13 14h.01"/></svg><span>Offers</span><span class="new-badge">NEW</span></a>
+      </nav>
+      <form class="search" role="search" action="../index.html#shop">
+        <label class="sr-only" for="site-search">Search products</label>
+        <input id="site-search" name="q" type="search" placeholder="Search products" />
+        <button class="search-button" type="submit" aria-label="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+      </form>
+      <div class="utility-actions">
+        <a class="utility-action" href="../index.html#cart" aria-label="Cart"><span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 1.9-1.4L21 9H6"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/><path d="M13.5 5v7m-3.5-3.5h7"/></svg></span><span>Cart</span></a>
+        <a class="utility-action track-action" href="../track-order/index.html"><span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h13v12H2zM15 10h4l3 3v5h-7z"/><circle cx="6.5" cy="18" r="2"/><circle cx="18.5" cy="18" r="2"/><path d="M5 9h6M5 12h4"/></svg></span><span>Track Order</span></a>
+        <a class="utility-action" id="account-link" href="../account/index.html"><span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></span><span>Login</span></a>
+      </div>
+    </header>
+    <nav class="category-nav" aria-label="Product categories">
+      <a href="index.html?category=honey">Honey</a>
+      <a href="index.html?category=dry_food">Dry Food</a>
+      <a href="index.html?category=mix_food">Mix Food</a>
+      <a href="index.html?category=nuts_seeds">Nuts &amp; Seeds</a>
+      <a href="index.html?category=pickle">Pickle (আচার)</a>
+      <a href="index.html?category=dates">Dates (খেজুর)</a>
+      <a href="index.html?category=masala">Masala (মসলা কষে)</a>
+      <a href="index.html?category=tea">Tea</a>
+    </nav>
+    <main class="product-page">
+      <p id="product-page-status" class="product-page-status" role="status" aria-live="polite">Loading product…</p>
+      <section id="product-detail" class="product-detail" hidden>
+        <div class="product-gallery">
+          <div class="product-main-image-frame">
+            <img id="product-main-image" src="" alt="" />
+            <button id="product-image-prev" class="gallery-arrow prev" type="button" aria-label="Previous image">‹</button>
+            <button id="product-image-next" class="gallery-arrow next" type="button" aria-label="Next image">›</button>
+            <button id="product-image-zoom" class="gallery-zoom" type="button" aria-label="Zoom product image">⌕</button>
+          </div>
+          <div id="product-image-thumbnails" class="product-image-thumbnails" aria-label="Product images"></div>
+        </div>
+        <div class="product-summary">
+          <p class="product-stock-label" id="product-stock-label"></p>
+          <h1 id="product-title"></h1>
+          <p id="product-short-description" class="product-short-description"></p>
+          <div class="product-price-line"><strong id="product-special-price"></strong><del id="product-regular-price"></del><span id="product-discount" class="product-discount" hidden></span></div>
+          <section id="quantity-options-section" class="quantity-options-section" hidden>
+            <h2>Choose quantity</h2>
+            <div id="product-quantity-options" class="product-quantity-options"></div>
+          </section>
+          <div class="quantity-subtotal-row">
+            <div class="subtotal-block"><span>Subtotal</span><strong id="product-subtotal"></strong></div>
+            <div class="quantity-block"><span>Quantity</span><div class="quantity-stepper"><button id="quantity-minus" type="button" aria-label="Decrease quantity">−</button><output id="product-quantity">1</output><button id="quantity-plus" type="button" aria-label="Increase quantity">+</button></div></div>
+          </div>
+          <div class="product-purchase-actions"><button id="add-to-cart" class="add-to-cart-button" type="button">Add to Cart</button><button id="buy-now" class="buy-now-button" type="button">Buy Now</button></div>
+          <p id="product-action-status" class="product-action-status" role="status" aria-live="polite"></p>
+          <div class="product-service-promises"><div><span aria-hidden="true">↗</span><strong>Fast delivery</strong><small>Quick delivery to your door</small></div><div><span aria-hidden="true">৳</span><strong>Cash on delivery</strong><small>Pay when your order arrives</small></div><div><span aria-hidden="true">✓</span><strong>Quality guarantee</strong><small>Carefully selected products</small></div></div>
+        </div>
+      </section>
+      <section id="product-description-panel" class="product-description-panel" hidden aria-labelledby="description-tab">
+        <div class="description-panel-heading"><h2 id="description-tab">Description</h2></div>
+        <div id="product-description-content" class="product-description-content">
+          <h3 id="product-description-title"></h3>
+          <div id="product-description"></div>
+        </div>
+        <button id="toggle-description" class="toggle-description" type="button" aria-expanded="false" hidden>Show more <span aria-hidden="true">⌄</span></button>
+      </section>
+      <div id="product-image-lightbox" class="product-image-lightbox" hidden><button id="close-product-lightbox" type="button" aria-label="Close zoomed image">×</button><img id="lightbox-image" src="" alt="" /></div>
+    </main>
+    <footer class="site-footer">
+      <div class="site-footer-main">
+        <section class="site-footer-brand" aria-label="About LataBoom"><a class="site-footer-logo" href="../index.html" aria-label="LataBoom home"><img src="../assets/lataboom_logo_transparent.png" alt="LataBoom" /></a><p>Everyday favorites for your home, pantry, and table.</p><span class="site-footer-note">Thoughtfully chosen. Delivered with care.</span></section>
+        <nav class="site-footer-column" aria-label="Explore LataBoom"><h2>Explore</h2><a href="../index.html">Home</a><a href="../about/index.html">About us</a><a href="index.html">Shop all products</a><a href="../offers/index.html">Current offers</a></nav>
+        <nav class="site-footer-column" aria-label="Customer care"><h2>Customer care</h2><a href="../track-order/index.html">Track an order</a><a href="../account/index.html">My account</a><a href="../checkout/index.html">Shopping cart &amp; checkout</a><a href="index.html">Browse categories</a></nav>
+      </div>
+      <div class="site-footer-bottom"><span>© 2026 LataBoom. All rights reserved.</span></div>
+    </footer>
+  </body>
+</html>

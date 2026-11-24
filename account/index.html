@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Sign in or create your LataBoom account." />
+    <title>Login or Register | LataBoom</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../cart.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js"></script>
+    <script type="module" src="../cart.js"></script>
+  </head>
+  <body>
+    <header id="top" class="utility-bar">
+      <a class="brand" href="../index.html" aria-label="LataBoom home">
+        <img class="brand-mark" src="../assets/lataboom_logo_transparent.png" alt="LataBoom logo" />
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="nav-link" href="../index.html">Home</a>
+        <a class="nav-link" href="../about/index.html">About</a>
+        <a class="nav-link" href="../shop/index.html">Shop</a>
+        <a class="nav-link offer-link" href="../offers/index.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0l-7.2-7.2a2 2 0 0 1 0-2.8l7.2-7.2a2 2 0 0 1 1.4-.6H19a2 2 0 0 1 2 2v7.1a2 2 0 0 1-.4 1.5Z"/><circle cx="16" cy="8" r="1.2"/><path d="m8 14 5-5m-4 0h.01M13 14h.01"/></svg><span>Offers</span><span class="new-badge">NEW</span></a>
+      </nav>
+      <form class="search" role="search" action="../index.html#shop">
+        <label class="sr-only" for="site-search">Search products</label>
+        <input id="site-search" name="q" type="search" placeholder="Search products" />
+        <button class="search-button" type="submit" aria-label="Search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg></button>
+      </form>
+      <div class="utility-actions">
+        <a class="utility-action" href="../index.html#cart" aria-label="Cart"><span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.5a2 2 0 0 0 1.9-1.4L21 9H6"/><circle cx="10" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/><path d="M13.5 5v7m-3.5-3.5h7"/></svg></span><span>Cart</span></a>
+        <a class="utility-action track-action" href="../track-order/index.html"><span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 6h13v12H2zM15 10h4l3 3v5h-7z"/><circle cx="6.5" cy="18" r="2"/><circle cx="18.5" cy="18" r="2"/><path d="M5 9h6M5 12h4"/></svg></span><span>Track Order</span></a>
+        <a class="utility-action is-account-active" id="account-link" href="index.html" aria-current="page"><span class="action-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg></span><span>Login</span></a>
+      </div>
+    </header>
+    <nav class="category-nav" aria-label="Product categories">
+      <a href="../shop/index.html?category=honey">Honey</a>
+      <a href="../shop/index.html?category=dry_food">Dry Food</a>
+      <a href="../shop/index.html?category=mix_food">Mix Food</a>
+      <a href="../shop/index.html?category=nuts_seeds">Nuts &amp; Seeds</a>
+      <a href="../shop/index.html?category=pickle">Pickle (আচার)</a>
+      <a href="../shop/index.html?category=dates">Dates (খেজুর)</a>
+      <a href="../shop/index.html?category=masala">Masala (মসলা কষে)</a>
+      <a href="../shop/index.html?category=tea">Tea</a>
+    </nav>
+    <main class="account-page">
+      <section class="account-card" aria-label="Login or create an account">
+        <div class="account-tabs" role="tablist" aria-label="Account access">
+          <button class="account-tab is-active" id="login-tab" type="button" role="tab" aria-selected="true" aria-controls="login-panel">Login</button>
+          <button class="account-tab" id="register-tab" type="button" role="tab" aria-selected="false" aria-controls="register-panel">Create account</button>
+        </div>
+        <form id="login-panel" class="account-form" role="tabpanel" aria-labelledby="login-tab">
+          <label for="login-email">Email address</label>
+          <input id="login-email" name="email" type="email" autocomplete="username" placeholder="you@example.com" required />
+          <label for="login-password">Password</label>
+          <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required />
+          <button class="account-submit" type="submit">Login</button>
+          <p class="account-message" id="login-message" role="status" aria-live="polite"></p>
+        </form>
+        <form id="register-panel" class="account-form" role="tabpanel" aria-labelledby="register-tab" hidden>
+          <label for="register-name">Full name</label>
+          <input id="register-name" name="full_name" type="text" autocomplete="name" placeholder="Your name" required maxlength="100" />
+          <label for="register-phone">Phone number</label>
+          <input id="register-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="01XXXXXXXXX" maxlength="24" required />
+          <label for="register-email">Email address</label>
+          <input id="register-email" name="email" type="email" autocomplete="email" placeholder="you@example.com" required />
+          <label for="register-password">Password</label>
+          <input id="register-password" name="password" type="password" autocomplete="new-password" placeholder="At least 6 characters" minlength="6" required />
+          <button class="account-submit" type="submit">Create account</button>
+          <p class="account-message" id="register-message" role="status" aria-live="polite"></p>
+        </form>
+        <section id="signed-in-panel" class="signed-in-panel" hidden>
+          <div class="account-overview" aria-label="Account overview">
+            <article class="overview-tile"><span class="overview-icon" aria-hidden="true">♙</span><span><small>Account email</small><strong id="signed-in-email"></strong></span></article>
+            <article class="overview-tile"><span class="overview-icon" aria-hidden="true">▣</span><span><small>Items in cart</small><strong id="cart-item-count">0 items</strong></span></article>
+            <article class="overview-tile"><span class="overview-icon" aria-hidden="true">↗</span><span><small>Orders placed</small><strong id="order-count">0 orders</strong></span></article>
+          </div>
+          <div class="account-dashboard-grid">
+            <section class="account-data-section profile-section">
+              <div class="section-heading"><div><span class="section-eyebrow">YOUR DETAILS</span><h2>Profile information</h2></div><span class="profile-avatar" id="profile-avatar" aria-hidden="true">L</span></div>
+              <form id="profile-form" class="profile-form">
+                <label for="profile-name-input">Full name</label>
+                <input id="profile-name-input" name="full_name" autocomplete="name" maxlength="100" required />
+                <label for="profile-email-input">Email address</label>
+                <input id="profile-email-input" type="email" autocomplete="email" readonly aria-describedby="email-help" />
+                <small id="email-help" class="field-help">Your email is linked to your account and cannot be changed here.</small>
+                <label for="profile-phone-input">Phone number</label>
+                <input id="profile-phone-input" name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="24" placeholder="01XXXXXXXXX" />
+                <label for="profile-address-input">Delivery address</label>
+                <textarea id="profile-address-input" name="delivery_address" autocomplete="street-address" rows="3" maxlength="500" placeholder="House, road, area, and any delivery notes"></textarea>
+                <label for="profile-area-input">Delivery area</label>
+                <select id="profile-area-input" name="delivery_area">
+                  <option value="">Choose a delivery area</option>
+                  <option value="inside_dhaka">Inside Dhaka</option>
+                  <option value="sub_dhaka">Sub Dhaka</option>
+                  <option value="outside_dhaka">Outside Dhaka</option>
+                </select>
+                <button class="account-submit profile-save" type="submit">Save profile</button>
+                <p id="profile-message" class="account-message" role="status" aria-live="polite"></p>
+              </form>
+            </section>
+            <div class="account-activity-column">
+              <section class="account-data-section cart-section">
+                <div class="section-heading"><div><span class="section-eyebrow">READY WHEN YOU ARE</span><h2>Shopping cart</h2></div><a class="account-action-link" href="../index.html#cart">Open cart <span aria-hidden="true">→</span></a></div>
+                <div id="account-cart" class="account-data-list"><p>Loading cart…</p></div>
+                <div class="cart-summary"><span>Cart subtotal</span><strong id="account-cart-total">৳0</strong></div>
+              </section>
+              <section class="account-data-section orders-section">
+                <div class="section-heading"><div><span class="section-eyebrow">YOUR PURCHASES</span><h2>Order history</h2></div><a class="account-action-link" href="../track-order/index.html">Track an order <span aria-hidden="true">→</span></a></div>
+                <div id="account-orders" class="account-data-list"><p>Loading order history…</p></div>
+              </section>
+            </div>
+          </div>
+          <p id="account-data-status" class="account-data-status" role="status" aria-live="polite"></p>
+          <p id="session-message" class="account-message" role="status" aria-live="polite"></p>
+        </section>
+      </section>
+    </main>
+    <footer class="site-footer">
+      <div class="site-footer-main">
+        <section class="site-footer-brand" aria-label="About LataBoom"><a class="site-footer-logo" href="../index.html" aria-label="LataBoom home"><img src="../assets/lataboom_logo_transparent.png" alt="LataBoom" /></a><p>Everyday favorites for your home, pantry, and table.</p><span class="site-footer-note">Thoughtfully chosen. Delivered with care.</span></section>
+        <nav class="site-footer-column" aria-label="Explore LataBoom"><h2>Explore</h2><a href="../index.html">Home</a><a href="../about/index.html">About us</a><a href="../shop/index.html">Shop all products</a><a href="../offers/index.html">Current offers</a></nav>
+        <nav class="site-footer-column" aria-label="Customer care"><h2>Customer care</h2><a href="../track-order/index.html">Track an order</a><a href="index.html">My account</a><a href="../checkout/index.html">Shopping cart &amp; checkout</a><a href="../shop/index.html">Browse categories</a></nav>
+      </div>
+      <div class="site-footer-bottom"><span>© 2026 LataBoom. All rights reserved.</span></div>
+    </footer>
+  </body>
+</html>
